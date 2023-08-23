@@ -1,0 +1,24 @@
+name: Create Repository
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        required: true
+        description: "Repository name"
+        type: string
+      language:
+        required: true
+        description: "Language"
+        type: string
+jobs:
+  create-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Test echo
+        run: |
+          echo ${{ inputs.name }}
+          echo ${{ inputs.language }}
