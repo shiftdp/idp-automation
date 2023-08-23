@@ -40,24 +40,12 @@ jobs:
           clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
           operation: PATCH_RUN
           runId: ${{ fromJson(inputs.port_payload).context.runId }}
-          logMessage: "✅ Here we are"
+          logMessage: "Here we are ✅"
 
       - name: Test echo
         run: |
           echo ${{ inputs.name }}
           echo ${{ inputs.language }}
-
-      - name: Finish Port action
-        uses: port-labs/port-github-action@v1
-        with:
-          clientId: ${{ secrets.PORT_CLIENT_ID }}
-          clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
-          operation: PATCH_RUN
-          status: SUCCESS
-          summary: service deployed
-          runId: ${{ fromJson(inputs.port_payload).context.runId }}
-          logMessage: "Service deployment complete ✅"
-          link: '["${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"]'
 
       - name: Create workflow run entity
         uses: port-labs/port-github-action@v1
@@ -77,3 +65,15 @@ jobs:
               "conclusion": "success",
               "link": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
+
+      - name: Finish Port action
+        uses: port-labs/port-github-action@v1
+        with:
+          clientId: ${{ secrets.PORT_CLIENT_ID }}
+          clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+          operation: PATCH_RUN
+          status: SUCCESS
+          summary: service deployed
+          runId: ${{ fromJson(inputs.port_payload).context.runId }}
+          logMessage: "Service deployment complete ✅"
+          link: '["${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"]'
