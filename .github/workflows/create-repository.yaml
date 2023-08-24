@@ -30,6 +30,7 @@ jobs:
 
       - uses: actions/checkout@v3
         with:
+          path: "./idp-automation"
           fetch-depth: 0
 
       - name: list
@@ -59,7 +60,7 @@ jobs:
       - name: Copy and edit template
         run: |
           FILE_PATH=./argocd-management/environments/production/services/${{ inputs.name }}-repository.yaml
-          cp templates/repository.yaml $FILE_PATH
+          cp idp-automation/templates/repository.yaml $FILE_PATH
           yq --inplace ".metadata.name = \"${{ inputs.name }}-repository\"" $FILE_PATH
           yq --inplace ".metadata.labels.language = \"${{ inputs.language }}\"" $FILE_PATH
 
