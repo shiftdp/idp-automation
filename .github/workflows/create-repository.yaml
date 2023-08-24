@@ -66,8 +66,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          cd idp-automation
-          touch file.txt
+          cd argocd-management
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
@@ -75,9 +74,9 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          directory: ./idp-automation
-          # repository: shiftdp/argocd-management
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          directory: ./argocd-management
+          repository: shiftdp/argocd-management
+          github_token: ${{ secrets.REPO_SECRET }}
           branch: ${{ github.ref }}
           # force: true
 
