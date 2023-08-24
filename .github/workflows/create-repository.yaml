@@ -32,6 +32,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: list
+        run: |
+          ls
+
       - uses: actions/checkout@v3
         with:
           repository: "shiftdp/argocd-management"
@@ -39,10 +43,9 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      # - name: list
-      #   run: |
-      #     ls
-      #     exit 0
+      - name: list
+        run: |
+          ls
 
       - name: Log Start
         uses: port-labs/port-github-action@v1
