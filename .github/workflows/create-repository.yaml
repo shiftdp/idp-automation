@@ -67,8 +67,8 @@ jobs:
       - name: Commit changes
         run: |
           cd argocd-management
-          git config --local user.email "fasanosalvatore@hotmail.it"
-          git config --local user.name "Salvatore Fasano"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "Deploy ${{ inputs.name }}-repository"
       - name: Push changes
