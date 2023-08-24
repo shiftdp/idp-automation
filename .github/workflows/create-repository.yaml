@@ -76,7 +76,7 @@ jobs:
         with:
           directory: ./argocd-management
           repository: shiftdp/argocd-management
-          github_token: ${{ secrets.REPO_SECRET }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
           force: true
 
