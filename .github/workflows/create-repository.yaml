@@ -78,6 +78,7 @@ jobs:
           repository: shiftdp/argocd-management
           github_token: ${{ secrets.REPO_SECRET }}
           branch: ${{ github.ref }}
+          force: true
 
       - name: Create workflow run entity
         uses: port-labs/port-github-action@v1
