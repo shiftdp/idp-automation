@@ -91,13 +91,13 @@ jobs:
           clientId: ${{ secrets.PORT_CLIENT_ID }}
           clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
           operation: UPSERT
-          identifier: ${{ inputs.name }}
-          title: ${{ inputs.name }}
+          identifier: ${{ inputs.name }}-repository
+          title: ${{ inputs.name }}-repository
           blueprint: repo
           runId: ${{ fromJson(inputs.port_payload).context.runId }}
           properties: |
             {
-              "name": "${{ inputs.name }}",
+              "name": "${{ inputs.name }}-repository",
               "triggeringActor": "${{ github.actor }}",
               "status": "success",
               "conclusion": "success",
