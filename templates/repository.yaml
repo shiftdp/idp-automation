@@ -1,0 +1,10 @@
+apiVersion: repo.github.upbound.io/v1alpha1
+kind: Repository
+metadata:
+  name:
+  labels:
+    language:
+spec:
+  forProvider:
+    autoInit: true
+    visibility: public
