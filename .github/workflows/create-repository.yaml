@@ -14,6 +14,9 @@ on:
         required: true
         description: "Language"
         type: string
+
+permissions: write-all
+
 jobs:
   create-repo:
     runs-on: ubuntu-latest
