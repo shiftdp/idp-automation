@@ -29,7 +29,7 @@ jobs:
           clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
           operation: PATCH_RUN
           runId: ${{ fromJson(inputs.port_payload).context.runId }}
-          logMessage: "Start to create reposiotry 🏃‍♂️"
+          logMessage: "Start creating the repository 🏃‍♂️."
 
       - uses: actions/checkout@v3
         with:
@@ -49,25 +49,16 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: list
-        run: |
-          ls
-
-      - name: Log Start
-        uses: port-labs/port-github-action@v1
-        with:
-          clientId: ${{ secrets.PORT_CLIENT_ID }}
-          clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
-          operation: PATCH_RUN
-          runId: ${{ fromJson(inputs.port_payload).context.runId }}
-          logMessage: "Here we are ✅"
-
       - name: Copy and edit template
         run: |
-          FILE_PATH=./argocd-management/environments/production/services/${{ inputs.name }}-repository.yaml
-          cp idp-automation/templates/repository.yaml $FILE_PATH
-          yq --inplace ".metadata.name = \"${{ inputs.name }}-repository\"" $FILE_PATH
-          yq --inplace ".metadata.labels.language = \"${{ inputs.language }}\"" $FILE_PATH
+          REPO_FILE_PATH=./argocd-management/environments/production/services/${{ inputs.name }}-repository.yaml
+          MICROSERVICE_FILE_PATH=./argocd-management/environments/development/applications/${{ inputs.name }}-microservice.yaml
+          cp idp-automation/templates/repository.yaml $REPO_FILE_PATH
+          yq --inplace ".metadata.name = \"${{ inputs.name }}-repository\"" $REPO_FILE_PATH
+          yq --inplace ".metadata.labels.language = \"${{ inputs.language }}\"" $REPO_FILE_PATH
+          cp idp-automation/templates/microservice.yaml $MICROSERVICE_FILE_PATH
+          yq --inplace ".metadata.name = \"${{ inputs.name }}-microservice\"" $MICROSERVICE_FILE_PATH
+          yq --inplace ".spec.source.repoURL = \"https://github.com/shiftdp/${{ inputs.name }}-repository\"" $MICROSERVICE_FILE_PATH
 
       - name: Commit changes
         run: |
@@ -114,5 +105,5 @@ jobs:
           status: SUCCESS
           summary: service deployed
           runId: ${{ fromJson(inputs.port_payload).context.runId }}
-          logMessage: "Service deployment complete ✅"
+          logMessage: "Service deployment is complete ✅."
           link: '["${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"]'

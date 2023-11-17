@@ -8,3 +8,6 @@ spec:
   forProvider:
     autoInit: true
     visibility: public
+    template:
+      - owner: shiftdp
+        repository: nodejs-express-api-template
